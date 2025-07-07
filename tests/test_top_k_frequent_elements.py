@@ -1,13 +1,15 @@
+import pytest
 from src.top_k_frequent_elements import Solution
 
-def test_one():
-    result = Solution().topKFrequent(nums = [1,2,2,3,3,3], k = 2)
-    assert sorted(result) == [2,3]
+@pytest.mark.parametrize(
+        "nums, k, expected",
+        [
+            ([1,2,2,3,3,3], 2, [2,3]),
+            ([7,7], 1, [7]),
+            ([4,4,4,-1,-1,2,2,2,2,7], 2, [2,4])
+        ]
+)
 
-def test_two():
-    result = Solution().topKFrequent(nums = [7,7], k = 1)
-    assert sorted(result) == [7]
-
-def test_three():
-    result = Solution().topKFrequent(nums = [4,4,4,-1,-1,2,2,2,2,7], k = 2)
-    assert sorted(result) == [2,4]
+def test_top_k_frequent_elements(nums, k, expected):
+    result = Solution().topKFrequent(nums = nums, k = k)
+    assert sorted(result) == expected
